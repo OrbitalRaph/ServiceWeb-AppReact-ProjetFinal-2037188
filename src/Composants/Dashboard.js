@@ -47,7 +47,13 @@ class Dashboard extends React.Component {
     }
 
     deleteAmoureux(id) {
-        LoveApi.delete(`/lovers/${id}`)
+        let cleAPI = prompt("Entrez la clé API pour confirmer", "50311c25-c949-499a-891a-9e75d0ca6ee4");
+        // call api with authorization header
+        LoveApi.delete(`/lovers/${id}`, {
+            headers: {
+                'Authorization': `Basic ${cleAPI}`
+            }
+        })
             .then((res) => {
                 const amoureuxList = this.state.amoureux.filter(amoureux => amoureux.id !== id);
                 this.setState({ amoureux: amoureuxList });
